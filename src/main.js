@@ -46,7 +46,7 @@ function printOutput(lines) {
   })
 
   const salesTax = document.createElement('p')
-  salesTax.innerText = `Sales Taxes: ${salesTaxVal}`
+  salesTax.innerText = `Sales Taxes: ${salesTaxVal.toFixed(2)}`
   output.appendChild(salesTax)
 
   const total = document.createElement('p')
