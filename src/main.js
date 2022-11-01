@@ -34,7 +34,7 @@ function convertLines(lines) {
 function calculateLineTax(subTotal, isImported, isExempt) {
   let lineTax = isImported ? subTotal * 0.05 : 0
   lineTax = isExempt ? lineTax : lineTax + subTotal * 0.1
-  return lineTax
+  return +(Math.ceil(lineTax * 20) / 20).toFixed(2)
 }
 
 function calculateSalesTaxTotal(lines) {
@@ -45,13 +45,15 @@ function calculateSalesTaxTotal(lines) {
 
 function printOutput(lines) {
   const output = document.querySelector('#output')
+  output.innerHTML = ''
   const salesTaxVal = calculateSalesTaxTotal(lines)
   let totalVal = 0
 
   lines.forEach((line) => {
     const lineOutput = document.createElement('p')
+    const lineTotal = (line.subTotal + line.tax).toFixed(2)
     totalVal += line.subTotal + line.tax
-    lineOutput.innerText = `${line.quantity} ${line.description}: ${line.subTotal}`
+    lineOutput.innerText = `${line.quantity} ${line.description}: ${lineTotal}`
     output.appendChild(lineOutput)
   })
 
