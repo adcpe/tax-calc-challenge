@@ -1,8 +1,11 @@
-function calculateLineTax(subTotal, isImported, isExempt) {
-  let lineTax = isImported ? subTotal * 0.05 : 0
-  lineTax = isExempt ? lineTax : lineTax + subTotal * 0.1
-  return lineTax
+function process() {
+  let lines = document.querySelector('#input').value.split('\n')
+  lines = convertLines(lines)
+  printOutput(lines)
 }
+
+const calculateButton = document.querySelector('#calculate')
+calculateButton.addEventListener('click', process)
 
 function convertLines(lines) {
   return lines.map((line) => {
@@ -26,6 +29,12 @@ function convertLines(lines) {
       tax
     }
   })
+}
+
+function calculateLineTax(subTotal, isImported, isExempt) {
+  let lineTax = isImported ? subTotal * 0.05 : 0
+  lineTax = isExempt ? lineTax : lineTax + subTotal * 0.1
+  return lineTax
 }
 
 function calculateSalesTaxTotal(lines) {
@@ -54,12 +63,3 @@ function printOutput(lines) {
   total.innerText = `Total: ${totalVal.toFixed(2)}`
   output.appendChild(total)
 }
-
-function process() {
-  let lines = document.querySelector('#input').value.split('\n')
-  lines = convertLines(lines)
-  printOutput(lines)
-}
-
-const calculateButton = document.querySelector('#calculate')
-calculateButton.addEventListener('click', process)
