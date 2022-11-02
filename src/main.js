@@ -39,8 +39,8 @@ function printOutput(lines) {
 
   lines.forEach((line) => {
     const lineOutput = document.createElement('p')
-    const lineTotal = (line.subTotal + line.tax).toFixed(2)
-    totalVal += line.subTotal + line.tax
+    const lineTotal = +(line.subTotal + line.tax).toFixed(2)
+    totalVal += lineTotal
     lineOutput.innerText = `${line.quantity} ${line.description}: ${lineTotal}`
     output.appendChild(lineOutput)
   })

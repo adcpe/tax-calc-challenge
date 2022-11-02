@@ -1,7 +1,9 @@
 function calculateLineTax(subTotal, isImported, isExempt) {
-  let lineTax = isImported ? subTotal * 0.05 : 0
-  lineTax = isExempt ? lineTax : lineTax + subTotal * 0.1
-  return +(Math.ceil(lineTax * 20) / 20).toFixed(2)
+  let taxPercent = 0
+  if (isImported) taxPercent += 0.05
+  if (!isExempt) taxPercent += 0.1
+  taxPercent = taxPercent.toFixed(2)
+  return +(Math.ceil(subTotal * taxPercent * 20) / 20).toFixed(2)
 }
 
 function calculateSalesTaxTotal(lines) {
